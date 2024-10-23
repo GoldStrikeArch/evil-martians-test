@@ -1,15 +1,27 @@
 <script>
+    import { login } from "./api.ts";
     let a = $state(0);
     let email = $state("");
     let password = $state("");
+    let isPending = $state(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        isPending = true;
+        console.log("submit");
+        try {
+            const res = await login(email, password);
+            console.log("res is", res, res.status);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            isPending = false;
+        }
+    };
 </script>
 
 <main>
-    <form
-        onsubmit={(d) => {
-            console.llog(d);
-        }}
-    >
+    <form onsubmit={handleSubmit}>
         <label
             >Email
             <input
@@ -35,7 +47,12 @@
         <button type="button" aria-label="Show password">
             <div class="eye-icon"></div></button
         >
-        <button type="submit">Login</button>
+        <button
+            disabled={isPending}
+            aria-disabled={isPending}
+            class:disabled={isPending}
+            type="submit">Login</button
+        >
     </form>
 </main>
 
@@ -58,5 +75,11 @@
         padding: 1rem;
         border: 1px solid #ccc;
         border-radius: 0.5rem;
+    }
+
+    .disabled {
+        opacity: 0.5;
+        background-color: #ccc;
+        color: #666;
     }
 </style>

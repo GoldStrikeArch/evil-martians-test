@@ -12,7 +12,7 @@ const passwordValidation = (email: string, password: string) =>
 export const login = async (email: string, password: string) => {
   await sleep(2000);
 
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.2) {
     return Promise.reject(new Error("Network error"));
   }
 
