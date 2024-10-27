@@ -10,7 +10,7 @@ const passwordValidation = (email: string, password: string) =>
   users.get(email) === password;
 
 export const login = async (email: string, password: string) => {
-  await sleep(2000);
+  await sleep(1500);
 
   if (Math.random() < 0.2) {
     return Promise.reject(new Error("Network error"));
