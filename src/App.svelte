@@ -1,9 +1,11 @@
 <script>
+    import MeteorsBgAnimation from "./components/MeteorsBgAnimation.svelte";
     import { login } from "./api.ts";
-    let a = $state(0);
+
     let email = $state("");
     let password = $state("");
     let isPending = $state(false);
+    let showPassword = $state(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,35 +20,59 @@
             isPending = false;
         }
     };
+
+    function togglePassword(node, showPassword) {
+        return {
+            update: (showPassword) => {
+                if (showPassword) {
+                    node.type = "text";
+                } else {
+                    node.type = "password";
+                }
+            },
+        };
+    }
 </script>
 
 <main>
+    <MeteorsBgAnimation />
     <form onsubmit={handleSubmit}>
-        <label
+        <label class="field"
             >Email
             <input
-                required
-                aria-invalid="true"
-                aria-errormessage="email-error"
+                class="input"
                 type="email"
                 bind:value={email}
                 autocomplete="username"
+                required
             />
         </label>
-        <label
+        <label class="field"
             >Password
-            <input
-                id="password"
-                type="password"
-                bind:value={password}
-                autocomplete="current-password"
-            />
+            <div class="password-container">
+                <input
+                    use:togglePassword={showPassword}
+                    bind:value={password}
+                    class="input"
+                    id="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                />
+                <button
+                    onclick={() => {
+                        showPassword = !showPassword;
+                    }}
+                    type="button"
+                    class="eye-icon"
+                    aria-label={showPassword
+                        ? "Hide Password"
+                        : "Show Password"}
+                >
+                    {showPassword ? "🙈" : "👁️"}
+                </button>
+            </div>
         </label>
-        Forgot your password?
-        <a href="/restore">Reset it here</a>
-        <button type="button" aria-label="Show password">
-            <div class="eye-icon"></div></button
-        >
         <button
             disabled={isPending}
             aria-disabled={isPending}
@@ -59,8 +85,7 @@
 <style>
     main {
         display: flex;
-        max-width: 1024px;
-        min-height: 100vh;
+        min-height: 100dvh;
         line-height: 1.1;
         text-align: center;
         flex-direction: column;
@@ -69,6 +94,7 @@
     }
 
     form {
+        background-color: aqua;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -77,9 +103,33 @@
         border-radius: 0.5rem;
     }
 
+    .input {
+        width: 100%;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
     .disabled {
         opacity: 0.5;
-        background-color: #ccc;
+        /* background-color: #ccc; */
+        background-color: yellow;
         color: #666;
+    }
+
+    .eye-icon {
+        position: absolute;
+        right: 0;
+        width: 1rem;
+        height: 1rem;
+        background-color: #ccc;
+    }
+
+    .password-container {
+        display: flex;
+        gap: 0.5rem;
+        position: relative;
     }
 </style>
