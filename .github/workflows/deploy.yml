@@ -20,7 +20,7 @@ jobs:
       - name: Test
         run: bun test
       - name: Build
-        run: bun build
+        run: bun run build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
