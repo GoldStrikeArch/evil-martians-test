@@ -9,10 +9,10 @@ body {
     overflow: hidden;
     width: 100dvw;
     height: 100dvh;
-    color: #fff;
+    color: hsl(0 0 100);
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-    background-image: url("./assets/mars2.webp");
-    background-color: black;
+    background-image: url("./assets/mars.webp");
+    background-color: tan;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

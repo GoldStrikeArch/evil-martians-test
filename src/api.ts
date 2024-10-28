@@ -1,5 +1,5 @@
 const users = new Map([
-  ["test@test.com", "asd1234%"],
+  ["test@test.com", "123456"],
   ["someOtherUser@gmail.com", "qwerty123"],
 ]);
 
@@ -17,10 +17,10 @@ export const login = async (email: string, password: string) => {
   }
 
   if (!emailValidation(email) || !passwordValidation(email, password)) {
-    return new Response(
-      "Invalid credentials, please check your email and password",
-      { status: 401 },
-    );
+    return new Response(null, {
+      status: 401,
+      statusText: "Invalid credentials, please check your email and password",
+    });
   }
 
   return new Response("OK, you are logged in!", { status: 200 });

@@ -1,43 +1,49 @@
 <script>
-    let { number = 15 } = $props();
-    let meteorStyles = $state([]);
+    let { amount = 25 } = $props();
 
-    let createMeteors = (num) => {
-        meteorStyles = [];
-        const styles = [...new Array(num)].map(() => ({
-            top: -20 + "px",
-            left: Math.floor(Math.random() * 700) + "px",
-            delay: Math.random() * 1 + 0.2 + "s",
-            duration: Math.floor(Math.random() * 8 + 2.9) + "s",
-        }));
-        meteorStyles = styles;
-    };
-
-    createMeteors(number);
+    const styles = new Array(amount).fill(null).map(() => ({
+        top: -20 + "px",
+        left: Math.floor(Math.random() * 850) + "px",
+        delay: Math.random() * 1 + 0.2 + "s",
+        duration: Math.floor(Math.random() * 8 + 2.9) + "s",
+    }));
 </script>
 
-{#each meteorStyles as style, idx}
-    <div
-        id="meteor-{idx + 1}"
-        style="top: {style.top}; left: {style.left}; animation-delay: {style.delay}; animation-duration: {style.duration};"
-        class="meteor"
-    >
-        <div class="tail"></div>
-    </div>
-{/each}
+<div class="container">
+    {#each styles as style}
+        <div
+            style="top: {style.top}; left: {style.left}; animation-delay: {style.delay}; animation-duration: {style.duration};"
+            class="meteor"
+        >
+            <div class="tail"></div>
+        </div>
+    {/each}
+</div>
 
 <style>
+    :root {
+        --meteor-color: hsl(215 16 47);
+        --tail-color: hsl(263 78 92 / 0.8);
+    }
+
+    .container {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-color: transparent;
+    }
+
     .meteor {
-        background-color: rgb(100 116 139);
         position: absolute;
         z-index: 10;
-        border-radius: 9999px;
-        pointer-events: none;
         width: 2.4px;
         height: 2.4px;
+        background-color: var(--meteor-color);
+        border-radius: 9999px;
         transform: rotate(215deg);
-        box-shadow: 0 0 0 1px #ffffff10;
         animation: meteor 5s linear infinite;
+        pointer-events: none;
     }
 
     .tail {
@@ -47,8 +53,8 @@
         height: 1px;
         background-image: linear-gradient(
             to right,
-            #64748b,
-            rgb(37 99 235 / 0.3),
+            var(--meteor-color),
+            var(--tail-color),
             transparent
         );
         background-color: transparent;
@@ -66,7 +72,7 @@
             opacity: 1;
         }
         100% {
-            transform: rotate(215deg) translateX(-500px);
+            transform: rotate(215deg) translateX(-400px);
             opacity: 1;
         }
     }

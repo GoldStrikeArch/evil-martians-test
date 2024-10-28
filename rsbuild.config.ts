@@ -9,5 +9,6 @@ export default defineConfig({
   html: {
     template: "./public/index.html",
     title: "Evil Martians Demo Task",
+    favicon: './src/assets/favicon.ico'
   },
 });
