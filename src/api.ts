@@ -1,4 +1,4 @@
-const users = new Map([
+export const users = new Map([
   ["test@test.com", "123456"],
   ["someOtherUser@gmail.com", "qwerty123"],
 ]);
