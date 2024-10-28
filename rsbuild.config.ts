@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [pluginSvelte()],
   output: {
     injectStyles: true,
+    assetPrefix: 'https://goldstrikearch.github.io/evil-martians-test/'
   },
   html: {
     template: "./public/index.html",

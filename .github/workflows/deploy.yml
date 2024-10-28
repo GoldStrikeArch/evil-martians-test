@@ -40,11 +40,12 @@ jobs:
         run: bun run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: "test"
+        run: ls -a
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
-          destination: ./_site
+          source: ./dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
