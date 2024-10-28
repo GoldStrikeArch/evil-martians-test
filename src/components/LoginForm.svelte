@@ -101,6 +101,7 @@
         opacity: 0.5;
         background-color: hsl(0 0 40);
         color: hsl(0, 0 40);
+        cursor: not-allowed;
     }
 
     .toggle-password-button {

@@ -19,17 +19,17 @@ bun install
 Start the dev server:
 
 ```bash
-bun dev
+bun run dev
 ```
 
 Build the app for production:
 
 ```bash
-bun build
+bun run build
 ```
 
 Preview the production build locally:
 
 ```bash
-bun preview
+bun run preview
 ```
